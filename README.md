@@ -48,9 +48,16 @@ sudo chmod 777 /data
 ## download data sets
 ```
 cd /data
-wget http://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/UniRef30_2020_06_hhsuite.tar.gz
-wget https://bfd.mmseqs.com/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt.tar.gz
-wget https://files.ipd.uw.edu/pub/RoseTTAFold/pdb100_2021Mar03.tar.gz
+
+# s3 copies (faster downloads)
+https://agiletek-rosettafold.s3.amazonaws.com/UniRef30_2020_06_hhsuite.tar.gz
+https://agiletek-rosettafold.s3.amazonaws.com/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt.tar.gz
+https://agiletek-rosettafold.s3.amazonaws.com/pdb100_2021Mar03.tar.gz
+
+# original urls
+# wget http://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/UniRef30_2020_06_hhsuite.tar.gz
+# wget https://bfd.mmseqs.com/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt.tar.gz
+# wget https://files.ipd.uw.edu/pub/RoseTTAFold/pdb100_2021Mar03.tar.gz
 
 mkdir -p UniRef30_2020_06
 tar xfz UniRef30_2020_06_hhsuite.tar.gz -C ./UniRef30_2020_06
