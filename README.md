@@ -1,5 +1,6 @@
 
 # Run on g4dn.xlarge instance (Ubuntu Server 20.04 LTS (HVM), SSD Volume Type)
+# create and attach a volumne to instance gp3, 5000GB, /dev/sdf
 
 ## install nvidia drivers on host
 ```
@@ -35,30 +36,47 @@ sudo docker build -t pf1 .
 ```
 At this, point we should push the built image to an image respository
 
+## mount volume and download databases to host
+```
+sudo lsblk -f
+sudo mkfs -t xfs /dev/nvme1n1
+sudo mkdir -p /data
+mount /dev/nvme1n1 /data
+sudo chmod 777 /data
+```
+
+## download data sets
+```
+cd /data
+wget http://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/UniRef30_2020_06_hhsuite.tar.gz
+wget https://bfd.mmseqs.com/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt.tar.gz
+wget https://files.ipd.uw.edu/pub/RoseTTAFold/pdb100_2021Mar03.tar.gz
+
+mkdir -p UniRef30_2020_06
+tar xfz UniRef30_2020_06_hhsuite.tar.gz -C ./UniRef30_2020_06
+
+mkdir -p bfd
+tar xfz bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt.tar.gz -C ./bfd
+
+tar xfz pdb100_2021Mar03.tar.gz
+
+```
+
+
 ## run fold prediction
-This must run on a host with nvidia gpu and drivers
 ```
 cd ~/pf1
 sudo docker run -it --rm --gpus all --name pf1test \
      -v "$(pwd)/output:/output" \
     -e "NAME=tsp1" \
     -e "SEQUENCE=MAAPTPADKSMMAAVPEWTITNLKRVCNAGNTSCTWTFGVDTHLATATSCTYVVKANANASQASGGPVTCGPYTITSSWSGQFGPNNGFTTFAVTDFSKKLIVWPAYTDVQVQAGKVVSPNQSYAPANLPLEHHHHHH" \
-    pf1 /bin/sh -c "/src/run.sh"
+    pf1 bash 
+    
+    
+    /bin/sh -c "/src/run.sh"
 ```
 
 # Download
 ```
 scp -r -i ~/.ssh/at.pem 'ubuntu@54.209.212.120:/home/ubuntu/pf1/output/*' './output/'
 ```
-
-
-
-2.	Place databaseBuild.sh on /RoseTTAFold/ and run it as nohup
- nohup sh databaseBuild.sh &
-
-Usage
-1.	Cd RoseTTAFold/example
-2.	../run_e2e_ver.sh input.fa . 
-Note: input.fa file contains protein sequence 
-      . all logs/files will be placed on current directory 
-
