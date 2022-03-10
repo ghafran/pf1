@@ -12,6 +12,7 @@ RUN curl -O https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
 RUN bash Anaconda3-2020.02-Linux-x86_64.sh -b -f -p /opt/conda
 RUN echo 'export PATH=/opt/conda/bin:$PATH' >> ~/.bashrc
 ENV PATH="/opt/conda/bin:$PATH"
+RUN conda update -qy conda
 
 # copy source code
 COPY src /src
