@@ -45,7 +45,7 @@ mount /dev/nvme1n1 /data
 sudo chmod 777 /data
 ```
 
-## download data sets
+## download data sets - this is only needed one time
 ```
 cd /data
 

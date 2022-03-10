@@ -24,5 +24,8 @@ RUN conda env create -f RoseTTAFold-linux.yml
 RUN wget https://files.ipd.uw.edu/pub/RoseTTAFold/weights.tar.gz
 RUN tar xfz weights.tar.gz
 
+# install dependencies
 RUN ./install_dependencies.sh
 
+RUN chmod +x copy.sh
+RUN chmod +x run.sh
