@@ -12,7 +12,7 @@ ln -s /data/bfd /src/RoseTTAFold/bfd
 # create input file
 mkdir -p /src/RoseTTAFold/output
 cd /src/RoseTTAFold/output
-echo $SEQUENCE > input.fa
+cp /src/$SEQUENCE /src/RoseTTAFold/output/input.fa
 
 # run fold
 ../run_e2e_ver.sh input.fa .

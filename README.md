@@ -65,11 +65,10 @@ At this, point we should push the built image to an image respository
 ## run fold prediction
 ```
 cd ~/pf1
-export SEQUENCE=`cat tsp1.fa`
 sudo docker run -it --rm --gpus all --name pf1test \
      -v "$(pwd)/output:/output" \
      -v "/data:/data" \
-    -e "SEQUENCE=${SEQUENCE}" \
+    -e "SEQUENCE=tsp1.fa" \
     pf1 bash 
 
     /bin/sh -c "/src/run.sh"
