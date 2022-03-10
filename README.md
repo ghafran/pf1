@@ -1,6 +1,6 @@
 
-# Run on g4dn.xlarge instance (Ubuntu Server 20.04 LTS (HVM), SSD Volume Type)
-# create and attach a volumne to instance gp3, 5000GB, /dev/sdf
+# Run on g4dn.xlarge instance (Ubuntu Server 20.04 LTS (HVM), SSD Volume Type), 120GB
+# create and attach a volumne to instance gp3, 5,000GB, /dev/sdf
 
 ## install nvidia drivers on host
 ```
