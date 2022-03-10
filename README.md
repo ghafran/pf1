@@ -36,9 +36,9 @@ sudo chmod 777 /data
 ```
 
 ## download data sets - this is only needed one time
+We recommend saving these files in s3 for faster future downloads. Also the EBS volume created here should be re-used when deploying to Rafay cluster.
 ```
 cd /data
-# we recommend saving these files in s3 for faster future downloads
 # download databases
 wget https://files.ipd.uw.edu/pub/RoseTTAFold/weights.tar.gz
 wget http://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/UniRef30_2020_06_hhsuite.tar.gz
