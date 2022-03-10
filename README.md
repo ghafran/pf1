@@ -69,9 +69,7 @@ sudo docker run -it --rm --gpus all --name pf1test \
      -v "$(pwd)/output:/output" \
      -v "/data:/data" \
     -e "SEQUENCE=tsp1.fa" \
-    pf1 bash 
-
-    /bin/sh -c "/src/run.sh"
+    pf1 /bin/bash -c "/src/run.sh"
 ```
 
 # Download to local drive
