@@ -17,8 +17,12 @@ WORKDIR /src
 RUN git clone https://github.com/RosettaCommons/RoseTTAFold.git
 WORKDIR /src/RoseTTAFold
 
+# create conda environment for RoseTTAFold
 RUN export PATH="/root/anaconda3/bin:$PATH"
 RUN conda env create -f RoseTTAFold-linux.yml
+
+# create conda environment for pyRosetta folding & running DeepAccNet
+RUN conda env create -f folding-linux.yml
 
 # download databases
 RUN wget https://files.ipd.uw.edu/pub/RoseTTAFold/weights.tar.gz
