@@ -31,5 +31,5 @@ RUN conda env create -f folding-linux.yml
 # install dependencies
 RUN ./install_dependencies.sh
 
-RUN chmod +x copy.sh
-RUN chmod +x run.sh
+RUN chmod +x /src/copy.sh
+RUN chmod +x /src/run.sh
