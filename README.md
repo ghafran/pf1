@@ -26,16 +26,6 @@ sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
 ```
 
-## build docker image
-This must run on a host with nvidia gpu and drivers
-```
-cd ~
-git clone https://github.com/ghafran/pf1
-cd ~/pf1
-sudo docker build -t pf1 .
-```
-At this, point we should push the built image to an image respository
-
 ## mount volume and download databases to host
 ```
 sudo lsblk -f
@@ -62,20 +52,30 @@ tar xfz bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt.tar.gz -C ./bfd
 tar xfz pdb100_2021Mar03.tar.gz
 ```
 
+## build docker image
+This must run on a host with nvidia gpu and drivers
+```
+cd ~
+git clone https://github.com/ghafran/pf1
+cd ~/pf1
+sudo docker build -t pf1 .
+```
+At this, point we should push the built image to an image respository
+
 ## run fold prediction
 ```
 cd ~/pf1
+export SEQUENCE=`cat tsp1.fa`
 sudo docker run -it --rm --gpus all --name pf1test \
      -v "$(pwd)/output:/output" \
-    -e "NAME=tsp1" \
-    -e "SEQUENCE=MAAPTPADKSMMAAVPEWTITNLKRVCNAGNTSCTWTFGVDTHLATATSCTYVVKANANASQASGGPVTCGPYTITSSWSGQFGPNNGFTTFAVTDFSKKLIVWPAYTDVQVQAGKVVSPNQSYAPANLPLEHHHHHH" \
+     -v "/data:/data" \
+    -e "SEQUENCE=${SEQUENCE}" \
     pf1 bash 
-    
-    
+
     /bin/sh -c "/src/run.sh"
 ```
 
-# Download
+# Download to local drive
 ```
 scp -r -i ~/.ssh/at.pem 'ubuntu@54.209.212.120:/home/ubuntu/pf1/output/*' './output/'
 ```
