@@ -1,0 +1,10 @@
+*.pdb
+*.a3m
+*.npz
+*.atab
+*.hhr
+*.ss2
+log
+hhblits
+cache_mutex
+input.fa
